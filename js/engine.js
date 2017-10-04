@@ -9,7 +9,7 @@
  * drawn but that is not the case. What's really happening is the entire "scene"
  * is being drawn over and over, presenting the illusion of animation.
  *
- * This engine makes the canvas' context (ctx) object globally available to make 
+ * This engine makes the canvas' context (ctx) object globally available to make
  * writing app.js a little simpler to work with.
  */
 
@@ -50,6 +50,7 @@ var Engine = (function(global) {
         /* Set our lastTime variable which is used to determine the time delta
          * for the next time this function is called.
          */
+         /* delta = how many milliseconds have passed since the last interval */
         lastTime = now;
 
         /* Use the browser's requestAnimationFrame function to call this
