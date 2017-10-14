@@ -94,6 +94,11 @@ var Engine = (function(global) {
         allEnemies.forEach(function(enemy) {
             enemy.update(dt);
         });
+
+        // allItems.forEach(function(item) {
+        //     item.update();
+        // });
+
         player.update();
     }
 
@@ -107,6 +112,17 @@ var Engine = (function(global) {
         /* This array holds the relative URL to the image used
          * for that particular row of the game level.
          */
+        
+        /** First we create the variables of the different types of ground we have.
+         *  Afterwards we create a matrix for each row/column, where we will put
+         *  each type of ground for each spot, that will vary for each level.
+         */
+        var s = 'images/stone-block.png';
+        var g = 'images/grass-block.png';
+        var w = 'images/water-block.png';
+        var d = 'images/dirt-block.png';
+        var f = 'images/wood-block.png';
+        var matrix;
         var rowImages = [
                 'images/water-block.png',   // Top row is water
                 'images/stone-block.png',   // Row 1 of 3 of stone
@@ -118,6 +134,35 @@ var Engine = (function(global) {
             numRows = 6,
             numCols = 5,
             row, col;
+
+        matrix = [
+            [s,s,s,f,f,f,s,s,s], // row 1
+            [s,s,s,f,f,f,s,s,s], // row 2
+            [g,g,g,g,g,g,g,g,g], // row 3
+            [g,g,g,g,g,g,g,g,g], // row 4
+            [g,g,g,g,g,g,g,g,g], // row 5
+            [g,g,g,g,g,g,g,g,g], // row 6
+            [g,g,g,g,g,g,g,g,g], // row 7
+            [s,s,s,s,s,s,s,s,s]  // row 8
+        ];
+
+        // /* Loop through the number of rows and columns we've defined above
+        //  * and, using the rowImages array, draw the correct image for that
+        //  * portion of the "grid"
+        //  */
+        // for (row = 0; row < 8; row++) {
+        //     for (col = 0; col < 9; col++) {
+        //          The drawImage function of the canvas' context element
+        //          * requires 3 parameters: the image to draw, the x coordinate
+        //          * to start drawing and the y coordinate to start drawing.
+        //          * We're using our Resources helpers to refer to our images
+        //          * so that we get the benefits of caching these images, since
+        //          * we're using them over and over.
+                 
+        //         ctx.drawImage(Resources.get(rowImages[row][col]), col * 101, row * 83);
+        //     }
+        // }
+
 
         /* Loop through the number of rows and columns we've defined above
          * and, using the rowImages array, draw the correct image for that
@@ -137,6 +182,54 @@ var Engine = (function(global) {
         }
 
         renderEntities();
+
+        /** Function to wrap the text that will appear on the canvas when game_over or game_final */
+        var wrapText = function (ctx, text, x, y, maxWidth, lineHeight) {
+            var words = text.split(' ');
+            var line = '';
+                
+            for(var n = 0; n < words.length; n++) {
+                var testLine = line + words[n] + ' ';
+                var metrics = ctx.measureText(testLine);
+                var testWidth = metrics.width;
+                if (testWidth > maxWidth && n > 0) {
+                    ctx.strokeText(line, x, y);
+                    ctx.fillText(line, x, y);
+                    line = words[n] + ' ';
+                    y += lineHeight;
+                } else {
+                    line = testLine;
+                }
+            }
+            ctx.fillText(line, x, y);
+        };
+        var maxWidth = 100;
+        var lineHeight = 50;
+        var x = 250;
+        var y = 150;
+        var text = '';
+
+        if(gameLost) {
+            ctx.fillStyle = 'white';
+            ctx.globalCompositeOperation = 'source-over';
+            ctx.lineWidth = 3;
+            ctx.strokeStyle = 'black';
+            ctx.font = 'normal 30px "Share Tech Mono"';
+            ctx.textAlign = 'center';
+            ctx.fillText("Sorry you just lost the game",250,250);
+            player = null;         
+        }
+
+        if (gameWon) {
+            text = 'CONGRATULATIONS! You reaching the river BY-EVAN!';
+            ctx.globalCompositeOperation = 'source-over';
+            ctx.font = 'normal 40px "Share Tech Mono"';
+            ctx.fillStyle = 'white';
+            ctx.lineWidth = 3;
+            ctx.strokeStyle = 'black';
+            ctx.textAlign = 'center';
+            wrapText(ctx, text, x, y, maxWidth, lineHeight);
+        }
     }
 
     /* This function is called by the render function and is called on each game
@@ -149,6 +242,10 @@ var Engine = (function(global) {
          */
         allEnemies.forEach(function(enemy) {
             enemy.render();
+        });
+
+        allItems.forEach(function(item) {
+            item.render();
         });
 
         player.render();
@@ -184,7 +281,9 @@ var Engine = (function(global) {
         'images/Key.png',
         'images/Rock.png',
         'images/Selector.png',
-        'images/Star.png'
+        'images/Star.png',
+        'images/wood-block.png',
+        'images/dirt-block.png'
     ]);
     Resources.onReady(init);
 
