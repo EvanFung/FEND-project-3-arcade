@@ -31,7 +31,7 @@ To play the game, use the arrow keys from your keyboard to move your player up, 
 
 ### Scrennshot
 
-![screenshot](images/menu/screenshot.jpg "screenshot")
+![screenshot](images/menu/screenshot.JPG "screenshot")
 
 ### License
 
