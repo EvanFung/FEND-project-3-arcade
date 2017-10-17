@@ -83,7 +83,7 @@ Enemy.prototype.render = function() {
 };
 
 Enemy.prototype.randomSpeed = function() {
-    var speedMultiply = Math.floor(Math.random() * 5 + 1);
+    var speedMultiply = Math.floor(Math.random() * 7 + 1);
     this.speed = 75 * speedMultiply;
 }
 
