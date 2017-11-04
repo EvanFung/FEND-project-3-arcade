@@ -1,0 +1,81 @@
+Requires Changes
+
+还需满足 1 个要求 变化
+
+So far, great job with this project! Apart from the tips I left in the code review, you can also use the following resources:
+
+Book an 1:1 session with a mentor
+Check Udacity Discussion Forums or Stackoverflow
+Ask in the FEND Slack channel (You can request access here).
+Happy coding!
+
+Please check my code comments in the Code Review tab (line 75 of the app.js). There is an object encapsulation issue in the code.
+
+
+Great job with your README. In case you need inspiration in future projects, you can find suggestions in the following posts:
+
+http://stackoverflow.com/questions/2304863/how-to-write-a-good-readme
+https://robots.thoughtbot.com/how-to-write-a-great-readme
+http://www.wikihow.com/Write-a-Read-Me
+http://docs.writethedocs.org/writing/beginners-guide-to-docs/
+https://guides.github.com/features/mastering-markdown/
+
+You can also have a look at our Writing a READMEs course.
+
+Remember that there are always three places where you should write concise comments:
+
+Header comment
+You should write at least what the code should do. You can also write your name, the date and why you wrote the code.
+Function Header
+This comment should provide information about the purpose of the function. You should include at least the required parameters (if any), the transformations, and the expected output.
+Inline (above line) comment
+You should write this type of comment in any part of your code you feel that no everyone will get what you are trying to achieve with certain the function or partial code.
+In term of comments style, you can use JSDoc, YUIDoc or Docco.
+
+Finally, if you may require some inspiration or advice about what or how to write better comments, you can check this blog post.
+
+References
+http://www.cs.utah.edu/~germain/PPS/Topics/commenting.html
+http://stackoverflow.com/questions/6815903/what-is-the-correct-way-of-code-comments-in-javascript
+https://www.thinkful.com/learn/javascript-best-practices-1/#Comment-as-Much-as-Needed-but-Not-More
+
+
+In this project, it is not expected that functions from the global namespace/scope are called to handle a specific object's behaviours/actions. I suggest the following:
+
+Enemy.prototype.checkCollision = function () {
+  return (player.x > this.x - this.box.x/2 &&
+  //Other statements
+};
+then you can call it as this.checkCollision() here.
+
+p.s. It is okay if you create a global collision detection function that is not run by passing in this in either Enemy.prototype or Player.prototype
+
+
+
+
+Developer-to-Developer tip
+
+If you want to take your codes to the next level in future projects, why don't you try object inheritance? As you can see, in this project, for example, the Enemy and Player objects have common attributes/properties (in this case mainly the x and y properties), so why hardwiring or repeating yourself (remember the DRY - Don't Repeat Yourself - principle) when you can simply use available things?
+
+This is simply a tip to further expand your knowledge of JavaScript and Object Oriented Programming, and it is not required to successfully pass this project.
+
+Here are a couple of resources to start with, if you're interested of course!
+
+http://javascriptissexy.com/oop-in-javascript-what-you-need-to-know/
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Introduction_to_Object-Oriented_JavaScript
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain
+http://www.crockford.com/javascript/inheritance.html
+
+
+
+
+If you are interested in Game Development, perhaps the below references can help you to code games like a pro! :-)
+
+References
+http://codeincomplete.com/posts/2013/12/10/javascript_game_foundations_state_management/
+http://stackoverflow.com/questions/18038502/how-to-code-a-html5-game-with-distinct-game-states
+http://gamedevelopment.tutsplus.com/tutorials/finite-state-machines-theory-and-implementation--gamedev-11867
+https://github.com/jakesgordon/javascript-state-machine
+
+Excellent! You’re using one of the most comprehensive versions of the basic collision detection algorithm.
+190
