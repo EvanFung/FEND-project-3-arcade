@@ -78,7 +78,7 @@ Enemy.prototype.update = function(dt) {
         this.randomSpeed();
     }
 
-    if(checkCollision(this,player)) {
+    if(this.checkCollision(this,player)) {
         resetGame();
     }
 };
@@ -107,6 +107,12 @@ var Player = function(x,y,speed) {
     this.sprite = "images/char-boy.png";
 }
 Player.prototype = {
+    checkCollision: function(object,player) {
+       return (player.x > object.x - object.box.x/2 &&
+              player.x < object.x + object.box.x/2 &&
+              player.y > object.y - object.box.y/2 &&
+              player.y < object.y + object.box.y/2);       
+    },
     // Player class instance methods
     update: function() {
         // LogPlayerPosition();
@@ -161,12 +167,6 @@ Player.prototype = {
                 }
                 break;
         }
-    },
-    checkCollision: function(object,player) {
-       return (player.x > object.x - object.box.x/2 &&
-              player.x < object.x + object.box.x/2 &&
-              player.y > object.y - object.box.y/2 &&
-              player.y < object.y + object.box.y/2);       
     }
 };
 
@@ -196,6 +196,14 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
+
+// function checkCollision(object, player) {
+//   return (player.x > object.x - object.box.x/2 &&
+//           player.x < object.x + object.box.x/2 &&
+//           player.y > object.y - object.box.y/2 &&
+//           player.y < object.y + object.box.y/2);
+// }
+
 var resetGame  = function() {
     player.x = 0;
     player.y = 400;
