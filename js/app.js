@@ -57,6 +57,12 @@ var Enemy = function(x,y,speed) {
 //enemy's box model
 Enemy.prototype.box = {'x':101,'y':83};
 
+Enemy.prototype.checkCollision = function(object, player) {
+  return (player.x > object.x - object.box.x/2 &&
+          player.x < object.x + object.box.x/2 &&
+          player.y > object.y - object.box.y/2 &&
+          player.y < object.y + object.box.y/2);
+}
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
@@ -109,7 +115,7 @@ Player.prototype = {
             gameWon = true;
         }
         if(allItems.length > 0) {
-            if(checkCollision(allItems[0],this)) {
+            if(this.checkCollision(allItems[0],this)) {
                 currentLifes++;
                 document.getElementById('numberLifes').innerHTML = currentLifes.toString();
                 allItems.splice(0,1);
@@ -155,8 +161,15 @@ Player.prototype = {
                 }
                 break;
         }
+    },
+    checkCollision: function(object,player) {
+       return (player.x > object.x - object.box.x/2 &&
+              player.x < object.x + object.box.x/2 &&
+              player.y > object.y - object.box.y/2 &&
+              player.y < object.y + object.box.y/2);       
     }
 };
+
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
@@ -183,14 +196,6 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
-
-function checkCollision(object, player) {
-  return (player.x > object.x - object.box.x/2 &&
-          player.x < object.x + object.box.x/2 &&
-          player.y > object.y - object.box.y/2 &&
-          player.y < object.y + object.box.y/2);
-}
-
 var resetGame  = function() {
     player.x = 0;
     player.y = 400;
